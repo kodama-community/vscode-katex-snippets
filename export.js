@@ -1,0 +1,67 @@
+
+import { fixed } from "./snippets/fixed"
+import { unary } from "./snippets/unary"
+import { binary } from "./snippets/binary"
+import { generic } from "./snippets/generic"
+import { custom } from "./snippets/custom"
+
+import * as fs from 'fs';
+
+let data = {};
+
+const fixedKeys = Object.keys(fixed);
+for (const key of fixedKeys) {
+  const name = `\\${key}`;
+  data[`${key}`] = {
+    scope: 'latex', 
+    prefix: name,
+    body: [name],
+    description: fixed[key],
+  };
+}
+
+const unaryKeys = Object.keys(unary);
+for (const key of unaryKeys) {
+  const name = `\\${key}`;
+  data[`${key}`] = {
+    scope: 'latex', 
+    prefix: name,
+    body: [`${name}{$0}`],
+    description: unary[key]('a'),
+  };
+}
+
+const binaryKeys = Object.keys(binary);
+for (const key of binaryKeys) {
+  const name = `\\${key}`;
+  data[`${key}`] = {
+    scope: 'latex', 
+    prefix: name,
+    body: [`${name}{$0}{$1}`],
+    description: binary[key]('a', 'b'),
+  };
+}
+
+for (const value of generic) {
+  const key = value.label;
+  const name = `\\${key}`;
+  data[`${key}`] = {
+    scope: 'latex', 
+    prefix: name,
+    body: [value.apply],
+    description: value.detail,
+  };
+}
+
+for (const value of custom) {
+  const key = value.label;
+  const name = `\\${key}`;
+  data[`${key}`] = {
+    scope: 'latex', 
+    prefix: name,
+    body: [value.apply],
+    description: value.detail,
+  };
+}
+
+fs.writeFileSync("./vsc-katex-snip.json", JSON.stringify(data, null, 2));
