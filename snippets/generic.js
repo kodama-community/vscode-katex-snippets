@@ -139,6 +139,6 @@ export const generic = [
   {
     label: "array",
     detail: "\\begin{array}",
-    apply: "\\def\\arraystretch{1.5}\\begin{array}{c|c}\n  a & b " + doubleBackslash + "\n  c & d\n\\end{array}"
+    apply: "\\def\\arraystretch{1.5}\n\\begin{array}{c|c}\n  a & b " + doubleBackslash + "\n  c & d\n\\end{array}"
   }
 ];
