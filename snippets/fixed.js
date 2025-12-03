@@ -567,7 +567,7 @@ export const fixed = {
   "{": "{",
   "}": "}",
   "%": "%",
-  "\\": "\n",
+  // "\\": "\n",
   "newline": "\n",
   "Game": "⅁",
   "because": "∵",

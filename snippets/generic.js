@@ -1,97 +1,101 @@
+const doubleBackslash = "\\\\\\\\";
+
 const layoutEnvironment = (name) => ({
   label: name,
   detail: "\\begin{" + name + "}",
-  apply: "\\begin{" + name + "}\n{$0}\n\\end{" + name + "}"
+  apply: "\\begin{" + name + "}\n$1\n\\end{" + name + "}"
 });
 
 const matrixEnvironment = (name) => ({
-  label: "matrix",
+  label: name,
   detail: "\\begin{" + name + "}",
-  apply: "\\begin{" + name + "}\n  a & b \\\\\n  c & d\n\\end{" + name + "}"
+  apply: "\\begin{" + name + "}\n  a & b "
+    + doubleBackslash
+    + "\n  c & d\n\\end{" + name + "}"
 });
 
 export const generic = [
   {
-    label: "def", 
+    label: "def",
     detail: "\\def",
-    apply: "\\def$0{$1}"
+    apply: "\\def$1{$2}"
   },
   {
-    label: "gdef", 
+    label: "gdef",
     detail: "\\gdef",
-    apply: "\\gdef$0{$1}"
+    apply: "\\gdef$1{$2}"
   },
 
   {
-    label: "newcommand", 
+    label: "newcommand",
     detail: "\\newcommand",
-    apply: "\\newcommand$0[$1]{$2}"
+    apply: "\\newcommand$1[$2]{$2}"
   },
 
   {
     label: "renewcommand",
     detail: "\\renewcommand",
-    apply: "\\renewcommand$0[$1]{$2}"
+    apply: "\\renewcommand$1[$2]{$2}"
   },
 
   {
-    label: "providecommand", 
+    label: "providecommand",
     detail: "\\providecommand",
-    apply: "\\providecommand$0[$1]{$2}"
+    apply: "\\providecommand$1[$2]{$2}"
   },
 
   {
     label: "displaystyle",
     detail: "\\displaystyle",
-    apply: "\\displaystyle {$0}"
+    apply: "\\displaystyle {$1}"
   },
-  
+
   {
     label: "textstyle",
     detail: "\\textstyle",
-    apply: "\\textstyle {$0}"
+    apply: "\\textstyle {$1}"
   },
 
   {
     label: "binom",
     detail: "\\binom",
-    apply: "\\binom{$0}{$1}"
+    apply: "\\binom{$1}{$2}"
   },
 
   {
-    label: "dbinom", 
+    label: "dbinom",
     detail: "\\dbinom",
-    apply: "\\dbinom{$0}{$1}"
+    apply: "\\dbinom{$1}{$2}"
   },
 
   {
     label: "tbinom",
     detail: "\\tbinom",
-    apply: "\\tbinom{$0}{$1}"
-  },
-  
-  {
-    label: "brace", 
-    detail: "\\brace",
-    apply: "{$0 \\brace $1}"
+    apply: "\\tbinom{$1}{$2}"
   },
 
   {
-    label: "brack", 
+    label: "brace",
+    detail: "\\brace",
+    apply: "{$1 \\brace $2}"
+  },
+
+  {
+    label: "brack",
     detail: "\\brack",
-    apply: "{$0 \\brack $1}"
+    apply: "{$1 \\brack $2}"
   },
 
   {
     label: "choose",
     detail: "\\choose",
-    apply: "{$0 \\choose $1}"
+    apply: "{$1 \\choose $2}"
   },
 
   {
     label: "over",
     detail: "\\over",
-    apply: "{$0 \\over $1}"
+    apply: "{$1 \\over $2}"
   },
 
   layoutEnvironment("align"),
@@ -109,13 +113,13 @@ export const generic = [
   {
     label: "cases",
     detail: "\\begin{cases}",
-    apply: "\\begin{cases}\n0, & p \\\\\n1, & q\n\\end{cases}"
+    apply: "\\begin{cases}\n0, & p " + doubleBackslash + "\n1, & q\n\\end{cases}"
   },
 
   {
     label: "rcases",
     detail: "\\begin{rcases}",
-    apply: "\\begin{rcases}\n0, & p \\\\\n1, & q\n\\end{cases}"
+    apply: "\\begin{rcases}\n0, & p " + doubleBackslash + "\n1, & q\n\\end{cases}"
   },
 
   matrixEnvironment("matrix"),
@@ -129,6 +133,12 @@ export const generic = [
   {
     label: "CD",
     detail: "\\begin{CD}",
-    apply: "\\begin{CD}\nA @>a>> B \\\\\n@VbVV @AAcA \\\\\nC @= D\n \\end{CD}"
+    apply: "\\begin{CD}\nA @>a>> B " + doubleBackslash + "\n@VbVV @AAcA " + doubleBackslash + "\nC @= D\n \\end{CD}"
   },
+
+  {
+    label: "array",
+    detail: "\\begin{array}",
+    apply: "\\def\\arraystretch{1.5}\\begin{array}{c|c}\n  a & b " + doubleBackslash + "\n  c & d\n\\end{array}"
+  }
 ];

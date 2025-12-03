@@ -26,7 +26,7 @@ for (const key of unaryKeys) {
   data[`${key}`] = {
     scope: 'latex',
     prefix: name,
-    body: [`${name}{$0}`],
+    body: [`${name}{$1}`],
     description: unary[key]('a'),
   };
 }
@@ -37,7 +37,7 @@ for (const key of binaryKeys) {
   data[`${key}`] = {
     scope: 'latex',
     prefix: name,
-    body: [`${name}{$0}{$1}`],
+    body: [`${name}{$1}{$2}`],
     description: binary[key]('a', 'b'),
   };
 }
